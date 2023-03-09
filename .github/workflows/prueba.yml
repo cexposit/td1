@@ -13,7 +13,7 @@ jobs:
         with:
           repository: git@github.com:cexposit/td2.git
           ref: main
-          token: ${{ secrets.TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Create file
         run: echo "Hello, World!" > other-repository/new-file.txt
       - name: Push changes
@@ -28,4 +28,4 @@ jobs:
           force: true
           push: true
           branch: main
-          token: ${{ secrets.TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
