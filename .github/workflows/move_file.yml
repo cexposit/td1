@@ -35,31 +35,46 @@ jobs:
       - name: Hello Step
         run: echo "Hello ${{ github.actor }}"
 
-      - name: Pushes to another repository
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          #SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
-          API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          source-directory: 'output'
-          destination-github-username: 'cexposit'
-          destination-repository-name: 'td2'
-          user-email: cexposit@ull.edu.es
-          target-branch: main
+      - name: Move file
+        run: |
+          mkdir -p prueba
+          cp archivo.txt prueba
+        
+      - name: Commit changes
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+#         git config --global user.email "cexposit@ull.edu.es"
+#         git config --global user.name "cexposit"
+          git add .
+          git commit -m "Move file"
+          git push
+
+      #- name: Pushes to another repository
+       # uses: cpina/github-action-push-to-another-repository@main
+       # env:
+       ##   #SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+       #   API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
+       # with:
+       #   source-directory: 'output'
+       #   destination-github-username: 'cexposit'
+       #   destination-repository-name: 'td2'
+       #   user-email: cexposit@ull.edu.es
+       #   target-branch: main
       
       
       
-      - name: Pushes test file
-        uses: dmnemec/copy_file_to_another_repo_action@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          source_file: 'archivo.txt'
-          destination_repo: 'cexposit/td2'
-          destination_folder: '.'
-          user_email: 'cexposit@ull.edu.es'
-          user_name: 'cexposit'
-          commit_message: 'A custom message for the commit'          
+      #- name: Pushes test file
+      #  uses: dmnemec/copy_file_to_another_repo_action@main
+      #  env:
+      #    API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
+      #  with:
+      ##    source_file: 'archivo.txt'
+      #    destination_repo: 'cexposit/td2'
+    ##      destination_folder: '.'
+   #       user_email: 'cexposit@ull.edu.es'
+ ##         user_name: 'cexposit'
+ #         commit_message: 'A custom message for the commit'          
 
       #- name: Clone target repository
         #run: |
