@@ -14,6 +14,9 @@ jobs:
           repository: cexposit/td2.git
           ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: List of files
+        run: |
+          ls -R
       - name: Create file
         run: echo "Hello, World!" > td2/new-file.txt
       - name: Push changes
