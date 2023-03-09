@@ -37,7 +37,7 @@ jobs:
 
       - name: Clone target repository
         run: |
-          git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com/kaizten/todelete2.git target
+          git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com/cexposit/td2.git target
           cp archivo.txt target/
           cd target/
           ls
