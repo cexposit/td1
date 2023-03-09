@@ -39,7 +39,7 @@ jobs:
         run: |
           mkdir -p prueba
           cp archivo.txt prueba
-        
+  
       - name: Commit changes
         run: |
           git config user.name github-actions[bot]
