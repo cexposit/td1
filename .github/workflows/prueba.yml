@@ -8,35 +8,17 @@ jobs:
   clone_and_push:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - name: creates output
+        #run:  sh ./build.sh # some command from your repository that creates
+        #                    # output to "source-directory" ("output" in the example)
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
         with:
-          repository: ${{ github.repository }}
-
-      - name: Clone supercharge docs repository
-        uses: actions/checkout@v2
-        with:
-          repository: cexposit/td2
-          path: target
-          ref: 2.x          
-
-      - name: List files
-        run: |
-          ls -R
-
-      - name: Set git identity
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
-
-      - name: Clone target repository
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com/cexposit/td2.git target
-          cp archivo.txt target/
-          cd target/
-          ls -R
-          git add .
-          git diff-index --quiet HEAD || git commit -m "Automatic publish from github.com/project"
-          git push
+          source-directory: 'output'
+          destination-github-username: 'cexposit'
+          destination-repository-name: 'td2'
+          user-email: carles3@pina.cat
+          target-branch: main
