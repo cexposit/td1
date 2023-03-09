@@ -11,7 +11,7 @@ jobs:
       - name: Checkout other repository
         uses: actions/checkout@v2
         with:
-          repository: git@github.com:cexposit/td2.git
+          repository: cexposit/td2.git
           ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Create file
