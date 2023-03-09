@@ -1,0 +1,31 @@
+name: Clone and Push
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  clone_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout other repository
+        uses: actions/checkout@v2
+        with:
+          repository: git@github.com:cexposit/td2.git
+          ref: main
+          token: ${{ secrets.TOKEN }}
+      - name: Create file
+        run: echo "Hello, World!" > other-repository/new-file.txt
+      - name: Push changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          author_name: "GitHub Actions"
+          author_email: "actions@github.com"
+          message: "Add new-file.txt"
+          add: "other-repository/new-file.txt"
+          signoff: true
+          empty_commits: false
+          force: true
+          push: true
+          branch: main
+          token: ${{ secrets.TOKEN }}
