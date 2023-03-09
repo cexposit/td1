@@ -35,10 +35,24 @@ jobs:
       - name: Hello Step
         run: echo "Hello ${{ github.actor }}"
 
+      - name: Clone target repository
+        run: |
+          git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com/kaizten/todelete2.git target
+          cp archivo.txt target/
+          cd target/
+          ls
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          #git remote set-url origin https://cexposit:${{ secrets.GITHUB_TOKEN }}@github.com/cexposit/td2.git
+          git add .
+          git diff-index --quiet HEAD || git commit -m "Automatic publish from github.com/project"
+          git push
+
       - name: Move file
         run: |
           mkdir -p prueba
           cp archivo.txt prueba
+
 
       - name: Commit changes
         run: |
