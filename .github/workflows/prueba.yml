@@ -20,10 +20,14 @@ jobs:
           ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: List repository
+        run: |
+          ls -R
+
       - name: Modify Repo
         run: |
           # Make changes to the cloned repository here
-          cd repo-to-clone
+          cd td2
           echo "Hello World!" > file.txt
 
       - name: Commit Changes
