@@ -8,6 +8,11 @@ jobs:
   clone_and_push:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ github.repository }}
+
       - name: Clone Repo
         uses: actions/checkout@v2
         with:
