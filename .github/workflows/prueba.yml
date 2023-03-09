@@ -15,14 +15,14 @@ jobs:
           ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Create file
-        run: echo "Hello, World!" > other-repository/new-file.txt
+        run: echo "Hello, World!" > td2/new-file.txt
       - name: Push changes
         uses: EndBug/add-and-commit@v7
         with:
           author_name: "GitHub Actions"
           author_email: "actions@github.com"
           message: "Add new-file.txt"
-          add: "other-repository/new-file.txt"
+          add: "td2/new-file.txt"
           signoff: true
           empty_commits: false
           force: true
