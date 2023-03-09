@@ -8,27 +8,26 @@ jobs:
   clone_and_push:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout other repository
+      - name: Clone Repo
         uses: actions/checkout@v2
         with:
-          repository: cexposit/td2.git
+          repository: cexposit/td2
           ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: List of files
+
+      - name: Modify Repo
         run: |
-          ls -R
-      - name: Create file
-        run: echo "Hello, World!" > td2/new-file.txt
-      - name: Push changes
-        uses: EndBug/add-and-commit@v7
+          # Make changes to the cloned repository here
+          cd repo-to-clone
+          echo "Hello World!" > file.txt
+
+      - name: Commit Changes
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git commit -am "Modified repository"
+      
+      - name: Push Changes
+        uses: ad-m/github-push-action@master
         with:
-          author_name: "GitHub Actions"
-          author_email: "actions@github.com"
-          message: "Add new-file.txt"
-          add: "td2/new-file.txt"
-          signoff: true
-          empty_commits: false
-          force: true
-          push: true
-          branch: main
-          token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
